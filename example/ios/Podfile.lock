@@ -1,0 +1,35 @@
+PODS:
+  - Flutter (1.0.0)
+  - image_editor_pro (0.0.1):
+    - Flutter
+  - image_picker_ios (0.0.1):
+    - Flutter
+  - path_provider_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - image_editor_pro (from `.symlinks/plugins/image_editor_pro/ios`)
+  - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  image_editor_pro:
+    :path: ".symlinks/plugins/image_editor_pro/ios"
+  image_picker_ios:
+    :path: ".symlinks/plugins/image_picker_ios/ios"
+  path_provider_foundation:
+    :path: ".symlinks/plugins/path_provider_foundation/ios"
+
+SPEC CHECKSUMS:
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  image_editor_pro: 42587bd3938bbd1719738687db0b9d5d788239bd
+  image_picker_ios: b786a5dcf033a8336a657191401bfdf12017dabb
+  path_provider_foundation: 37748e03f12783f9de2cb2c4eadfaa25fe6d4852
+
+PODFILE CHECKSUM: ef19549a9bc3046e7bb7d2fab4d021637c0c58a3
+
+COCOAPODS: 1.11.3

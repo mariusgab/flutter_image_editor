@@ -1,5 +1,4 @@
 
-
 import 'package:flutter/material.dart';
 
 class BottomBarContainer extends StatelessWidget {
@@ -22,6 +21,7 @@ class BottomBarContainer extends StatelessWidget {
             ontap();
           },
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(icons,color: Colors.white,),
               SizedBox(
