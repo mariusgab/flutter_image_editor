@@ -1,4 +1,4 @@
-package zeeshux7860.update.image_editor_pro_example;
+package margab.flutter_image_editor_example;
 
 import io.flutter.embedding.android.FlutterActivity;
 

@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:screenshot/screenshot.dart';
 
-import '../image_editor_pro.dart';
+import '../flutter_image_editor.dart';
 import 'colors_picker.dart';
 
 class Sliders extends StatefulWidget {

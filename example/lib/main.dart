@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:image_editor_pro/image_editor_pro.dart';
+import 'package:flutter_image_editor/flutter_image_editor.dart';
 
 import 'package:image_picker/image_picker.dart';
 
@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   File _image;
 
   Future<void> getimageditor() => Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return ImageEditorPro(
+        return FlutterImageEditor(
           appBarColor: Colors.black87,
           bottomBarColor: Colors.black87,
           pathSave: null,
@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Image Editor Pro example',style: TextStyle(color: Colors.white),),
+        title: Text('Image Editor example',style: TextStyle(color: Colors.white),),
       ),
       floatingActionButton: FloatingActionButton(onPressed: () {},child: Icon(Icons.add),),
       body: condition(condtion: _image == null,isTrue: Padding(

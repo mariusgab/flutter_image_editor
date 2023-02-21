@@ -1,4 +1,4 @@
-group 'zeeshux7860.update.image_editor_pro'
+group 'margab.flutter_image_editor'
 version '1.0-SNAPSHOT'
 
 buildscript {

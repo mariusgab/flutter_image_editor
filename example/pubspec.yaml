@@ -1,5 +1,5 @@
-name: image_editor_pro_example
-description: Demonstrates how to use the image_editor_pro plugin.
+name: flutter_image_editor_example
+description: Demonstrates how to use the flutter_image_editor plugin.
 publish_to: 'none'
 
 environment:
@@ -17,7 +17,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  image_editor_pro:
+  flutter_image_editor:
     path: ../
 
 # For information on the generic Dart part of this file, see the

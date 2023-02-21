@@ -1,6 +1,6 @@
-# image_editor_pro_example
+# flutter_image_editor_example
 
-Demonstrates how to use the image_editor_pro plugin.
+Demonstrates how to use the flutter_image_editor plugin.
 
 ## Getting Started
 
