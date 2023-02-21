@@ -32,7 +32,7 @@ class _TextViewState extends State<TextView> {
         },
         onPanUpdate: widget.onpanupdate,
         child: Text(widget.mapJson['name'].toString(),
-          textAlign: TextAlign.values[widget.mapJson['align']],
+          textAlign: widget.mapJson['align'],
             style: TextStyle(
               color: widget.mapJson['color'],
               fontSize: widget.mapJson['size'],

@@ -254,7 +254,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                           TextButton(onPressed: () {
                             setState(() => currentColor = pickerColor);
                             Navigator.pop(context);
-                          }, child: Text("Got it"))
+                          }, child: Text("Done"))
                         ],
                       );
                     },
@@ -267,9 +267,11 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                 icons: Icons.text_fields,
                 ontap: () async {
                   var value = await Navigator.push(context, MaterialPageRoute(builder: (context) => TextEditorImage()));
-                  if (value['name'] == null) {
-                    print('true');
-                  } else {
+                  if (value == null) {
+                    return;
+                  }
+
+                  if (value['name'] != null) {
                     type.add(2);
                     widgetJson.add(value);
                     // fontsize.add(20);
@@ -327,14 +329,13 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                               borderRadius: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10)),
                             ),
                             padding: EdgeInsets.all(20),
-                            height: 400,
+                            height: 300,
                             child: Column(
                               children: [
                                 Center(
                                   child: Text('Slider Filter Color'.toUpperCase(),style: TextStyle(color: Colors.white),),
                                 ),
                                 Divider(),
-                                SizedBox(height: 20,),
                                 Text('Slider Color'.toUpperCase(),style: TextStyle(color: Colors.white),),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -361,9 +362,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                     }, child: Text("Reset",style: TextStyle(color: Colors.white),))
                                   ],
                                 ),
-                                SizedBox(height: 5,),
                                 Text("Slider Blur",style: TextStyle(color: Colors.white),),
-                                SizedBox(height: 10,),
                                 Row(
                                   children: [
                                     Expanded(child: Slider(
@@ -388,13 +387,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                     }, child: Text("Reset",style: TextStyle(color: Colors.white),))
                                   ],
                                 ),
-                                SizedBox(
-                                  height: 5,
-                                ),
                                 Text("Slider Opacity",style: TextStyle(color: Colors.white),),
-                                SizedBox(
-                                  height: 10,
-                                ),
                                 Row(
                                   children: [
                                     Expanded(child: Slider(
@@ -454,7 +447,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                         return StatefulBuilder(
                           builder: (context, setS) {
                             return Container(
-                                height: 300,
+                                height: 280,
                                 decoration: BoxDecoration(
                                   color: Colors.black87,
                                   borderRadius:
@@ -464,9 +457,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  SizedBox(height: 5,),
                                   Text("Slider Hue",style: TextStyle(color: Colors.white),),
-                                  SizedBox(height: 10,),
                                   Row(
                                     children: [
                                       Expanded(child: Slider(
@@ -491,9 +482,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                       }, child: Text("Reset",style: TextStyle(color: Colors.white),))
                                     ],
                                   ),
-                                  SizedBox(height: 5,),
                                   Text("Slider Saturation",style: TextStyle(color: Colors.white),),
-                                  SizedBox(height: 10,),
                                   Row(
                                     children: [
                                       Expanded(child: Slider(
@@ -520,9 +509,7 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                                     ],
                                   ),
 
-                                  SizedBox(height: 5,),
                                   Text("Slider Brightness",style: TextStyle(color: Colors.white),),
-                                  SizedBox(height: 10,),
                                   Row(
                                     children: [
                                       Expanded(child: Slider(
@@ -566,6 +553,10 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                         return Emojies();
                       });
                   getemojis.then((value) {
+                    if (value == null) {
+                      return;
+                    }
+
                     if (value['name'] != null) {
                       type.add(1);
                       widgetJson.add(value);
@@ -730,14 +721,14 @@ class _ImageEditorProState extends State<ImageEditorPro> {
           child: Column(
             children: [
               Center(
-                child: Text('Select Image Options'),
-              ),
-              SizedBox(
-                height: 10,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text('Select Image Options',textAlign: TextAlign.center,),
+                ),
               ),
               Divider(),
               Container(
-                padding: EdgeInsets.all(20),
+                padding: EdgeInsets.all(0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

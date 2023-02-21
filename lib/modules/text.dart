@@ -12,8 +12,8 @@ class TextEditorImage extends StatefulWidget {
 
 class _TextEditorImageState extends State<TextEditorImage> {
   TextEditingController name = TextEditingController();
-  Color currentColor = Colors.black;
-  double slider = 12.0;
+  Color currentColor = Colors.white;
+  double slider = 15.0;
   TextAlign? align;
 
   @override
@@ -79,20 +79,23 @@ class _TextEditorImageState extends State<TextEditorImage> {
         ],
       ),
       bottomNavigationBar: Container(
-        color: Colors.white,
-        child: TextButton(style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(Colors.black),
-          padding: MaterialStateProperty.all(EdgeInsets.all(15)),
-          shape: MaterialStateProperty.all(RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10))),
-        ),onPressed: () {
-          Navigator.pop(context, {
-            'name': name.text,
-            'color': currentColor,
-            'size': slider.toDouble(),
-            'align': align
-          });
-        }, child: Text("Add Text",style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),),),
+        // color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: TextButton(style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Colors.black),
+            padding: MaterialStateProperty.all(EdgeInsets.all(15)),
+            shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10))),
+          ),onPressed: () {
+            Navigator.pop(context, {
+              'name': name.text,
+              'color': currentColor,
+              'size': slider.toDouble(),
+              'align': align
+            });
+          }, child: Text("Add Text",style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),),),
+        ),
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -114,83 +117,100 @@ class _TextEditorImageState extends State<TextEditorImage> {
                   minLines: 5,
                   maxLines: 99999,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: currentColor,
+                    fontSize: slider
                   ),
                   autofocus: true,
                 ),
               ),
               Container(
-                color: Colors.white,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("Slider Color"),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(child: BarColorPicker(
-                            width: 300,
-                            thumbColor: Colors.white,
-                            cornerRadius: 10,
-                            pickMode: PickMode.Color,
-                            colorListener: (int value) {
+                // color: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Slider Color",style: TextStyle(color: Colors.white),),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(child: BarColorPicker(
+                                width: 280,
+                                thumbColor: Colors.white,
+                                cornerRadius: 10,
+                                pickMode: PickMode.Color,
+                                colorListener: (int value) {
+                                  setState(() {
+                                    currentColor = Color(value);
+                                  });
+                                })),
+                            TextButton(onPressed: () {
                               setState(() {
-                                currentColor = Color(value);
+                                currentColor = Colors.white;
                               });
-                            })),
-                        TextButton(onPressed: () {}, child: Text("Reset"))
-                      ],
-                    ),
-                    Text("Slider White Black Color"),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(child: BarColorPicker(
-                            width: 300,
-                            thumbColor: Colors.white,
-                            cornerRadius: 10,
-                            pickMode: PickMode.Grey,
-                            colorListener: (int value) {
-                              setState(() {
-                                currentColor = Color(value);
-                              });
-                            })),
-                        TextButton(onPressed: () {}, child: Text("Reset"))
-                      ],
-                    ),
-
-                    Container(
-                      color: Colors.black,
-                      child: Column(
-                        children: [
-                          SizedBox(height: 10,),
-                          Center(
-                            child: Text('Size Adjust'.toUpperCase(),style: TextStyle(color: Colors.white),),
-                          ),
-                          SizedBox(height: 10,),
-                          Slider(
-                              activeColor: Colors.white,
-                              inactiveColor: Colors.grey,
-                              value: slider,
-                              min: 0.0,
-                              max: 100.0,
-                              onChangeEnd: (v) {
-                                setState(() {
-                                  slider = v;
-                                });
-                              },
-                              onChanged: (v) {
-                                setState(() {
-                                  slider = v;
-                                });
-                              })
-                        ],
+                            }, child: Text("Reset",style: TextStyle(color: Colors.white),))
+                          ],
+                        ),
                       ),
-                    )
-                  ],
+                      Text("Slider White Black Color",style: TextStyle(color: Colors.white),),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(child: BarColorPicker(
+                                width: 280,
+                                thumbColor: Colors.white,
+                                cornerRadius: 10,
+                                pickMode: PickMode.Grey,
+                                colorListener: (int value) {
+                                  setState(() {
+                                    currentColor = Color(value);
+                                  });
+                                })),
+                            TextButton(onPressed: () {
+                              setState(() {
+                                currentColor = Colors.white;
+                              });
+                            }, child: Text("Reset",style: TextStyle(color: Colors.white),))
+                          ],
+                        ),
+                      ),
+
+                      Container(
+                        color: Colors.black,
+                        child: Column(
+                          children: [
+                            SizedBox(height: 10,),
+                            Center(
+                              child: Text('Size Adjust'.toUpperCase(),style: TextStyle(color: Colors.white),),
+                            ),
+                            Slider(
+                                activeColor: Colors.white,
+                                inactiveColor: Colors.grey,
+                                value: slider,
+                                min: 0.0,
+                                max: 100.0,
+                                onChangeEnd: (v) {
+                                  setState(() {
+                                    slider = v;
+                                  });
+                                },
+                                onChanged: (v) {
+                                  setState(() {
+                                    slider = v;
+                                  });
+                                })
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               )
             ],

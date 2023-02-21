@@ -37,9 +37,6 @@ class _SlidersState extends State<Sliders> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
-            height: 10,
-          ),
           Center(
             child: Text('Size Adjust'.toUpperCase(),style: TextStyle(color: Colors.white),),
           ),
@@ -62,68 +59,60 @@ class _SlidersState extends State<Sliders> {
                   widgetJson[widget.index]['size'] = v.toDouble();
                 });
               }),
-          SizedBox(
-            height: 10,
-          ),
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10)
-            ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Container(
+              decoration: BoxDecoration(
+                // color: Colors.white,
+                borderRadius: BorderRadius.circular(10)
+              ),
 
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 20,
-                ),
-                Text('Slider Color'),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(child: BarColorPicker(
-                        width: 300,
-                        thumbColor: Colors.white,
-                        cornerRadius: 10,
-                        pickMode: PickMode.Color,
-                        colorListener: (int value) {
-                          setState(() {
-                            widgetJson[widget.index]['color'] = Color(value);
-                          });
-                        })),
-                    TextButton(onPressed: () {}, child: Text("Reset"))
-                  ],
-                ),
-                Text('Slider White Black Color'),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(child: BarColorPicker(
-                        width: 300,
-                        thumbColor: Colors.white,
-                        cornerRadius: 10,
-                        pickMode: PickMode.Grey,
-                        colorListener: (int value) {
-                          setState(() {
-                            widgetJson[widget.index]['color'] = Color(value);
-                          });
-                        })),
-                    TextButton(onPressed: () {}, child: Text("Reset"))
-                  ],
-                )
-              ],
+              child: Column(
+                children: [
+                  Text('Slider Color',style: TextStyle(color: Colors.white),),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(child: BarColorPicker(
+                          width: 300,
+                          thumbColor: Colors.white,
+                          cornerRadius: 10,
+                          pickMode: PickMode.Color,
+                          colorListener: (int value) {
+                            setState(() {
+                              widgetJson[widget.index]['color'] = Color(value);
+                            });
+                          })),
+                      TextButton(onPressed: () {}, child: Text("Reset"))
+                    ],
+                  ),
+                  Text('Slider White Black Color',style: TextStyle(color: Colors.white),),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(child: BarColorPicker(
+                          width: 300,
+                          thumbColor: Colors.white,
+                          cornerRadius: 10,
+                          pickMode: PickMode.Grey,
+                          colorListener: (int value) {
+                            setState(() {
+                              widgetJson[widget.index]['color'] = Color(value);
+                            });
+                          })),
+                      TextButton(onPressed: () {}, child: Text("Reset"))
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
-
-          SizedBox(
-            height: 10,
-          ),
-
           Row(
             children: [
               Expanded(child: TextButton(style: TextButton.styleFrom(
-                backgroundColor: Colors.white,
+                // backgroundColor: Colors.white,
               ),onPressed: () {
                 widgetJson.removeAt(widget.index);
                 Navigator.pop(context);

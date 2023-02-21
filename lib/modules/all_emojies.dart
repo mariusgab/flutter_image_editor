@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:image_editor_pro/data/data.dart';
+import 'package:screenshot/screenshot.dart';
 
 class Emojies extends StatefulWidget {
   @override
@@ -25,46 +26,32 @@ class _EmojiesState extends State<Emojies> {
         ],
       ),
 
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Text('Select Emoji'),
-              ),
-              Divider(),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                height: 315,
-                child: GridView(
-                    shrinkWrap: true,
-                    physics: ClampingScrollPhysics(),
-                    scrollDirection: Axis.vertical,
-                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                        mainAxisSpacing: 0.0, maxCrossAxisExtent: 60.0),
-                    children: emojis.map((String emoji) {
-                      return GridTile(
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.pop(context, {
-                                'name': emoji,
-                                'color': Colors.white,
-                                'size': 12.0,
-                                'align': TextAlign.center
-                              });
-                            },
-                            child: Container(
-                              child: Text(emoji,style: TextStyle(fontSize: 35),),
-                            ),
-                          ));
-                    }).toList()),
-              )
-            ],
-          )
-        ],
+      child: Container(
+        height: 315,
+        child: GridView(
+          padding: EdgeInsets.all(8),
+            shrinkWrap: true,
+            physics: ClampingScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              crossAxisSpacing: 0,
+                mainAxisSpacing: 0.0, maxCrossAxisExtent: 55.0),
+            children: emojis.map((String emoji) {
+              return GridTile(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context, {
+                        'name': emoji,
+                        'color': Colors.white,
+                        'size': 35.0,
+                        'align': TextAlign.center
+                      });
+                    },
+                    child: Container(
+                      child: Text(emoji,style: TextStyle(fontSize: 35),),
+                    ),
+                  ));
+            }).toList()),
       ),
     );
   }
