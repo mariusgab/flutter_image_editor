@@ -1,6 +1,7 @@
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:image_editor_pro/image_editor_pro.dart';
-import 'package:firexcode/firexcode.dart';
+
 import 'package:image_picker/image_picker.dart';
 
 void main() {

@@ -7,7 +7,7 @@ import Foundation
 
 import firexcode
 import image_editor_pro
-import path_provider_macos
+import path_provider_foundation
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   FirexcodePlugin.register(with: registry.registrar(forPlugin: "FirexcodePlugin"))
