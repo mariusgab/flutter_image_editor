@@ -1,6 +1,8 @@
-# ImageEditorPro
+# FlutterImageEditor
 
 Image Editor Plugin with simple, easy support for image editing using Paints, Text, Filters, Emoji and Sticker like stories.
+
+This is an updated version of the deprecated [ImageEditorPro](https://github.com/zeeshux7860/ImageEditorPro).
 
 To start with this, we need to simply add the dependencies in the gradle file of our app module like this
 
