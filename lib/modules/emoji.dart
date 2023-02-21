@@ -8,12 +8,12 @@ class EmojiView extends StatefulWidget {
   final Function(DragUpdateDetails) onpanupdate;
 
   const EmojiView({
-    Key key,
-    this.left,
-    this.top,
-    this.ontap,
-    this.onpanupdate,
-    this.mapJson,
+    Key? key,
+    required this.left,
+    required this.top,
+    required this.ontap,
+    required this.onpanupdate,
+    required this.mapJson,
   }) : super(key: key);
   @override
   _EmojiViewState createState() => _EmojiViewState();
@@ -31,7 +31,9 @@ class _EmojiViewState extends State<EmojiView> {
               fontSize: widget.mapJson['size'],
             ))
         .xGesture(
-          onTap: widget.ontap,
+          onTap: () {
+            widget.ontap();
+          },
           onPanUpdate: widget.onpanupdate,
         )
         .xPositioned(

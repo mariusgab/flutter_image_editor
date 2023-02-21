@@ -9,24 +9,24 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
-  zoom_widget: ^0.1.3
-  font_awesome_flutter: ^9.0.0
-  image_picker: 
-  path_provider: ^2.0.1
-  permission_handler: ^7.0.0
-  dio: ^4.0.0
-  screenshot: ^0.3.0
-  signature: ^4.0.2
+  cupertino_icons: ^1.0.5
+  zoom_widget: ^2.0.1
+  font_awesome_flutter: ^10.4.0
+  image_picker: ^0.8.6+2 
+  path_provider: ^2.0.12
+  permission_handler: ^10.2.0
+  dio: ^5.0.0
+  screenshot: ^1.3.0
+  signature: ^5.3.2
   flutter_colorpicker: ^1.0.3
-  firexcode: ^1.0.5
+  firexcode: ^1.0.8
 
   flutter_web_plugins:
     sdk: flutter
-  collection: ^1.15.0
+  collection: ^1.17.0
 
 dev_dependencies:
-  pedantic: ^1.9.2
+  pedantic: ^1.11.1
 
   flutter_test:
     sdk: flutter

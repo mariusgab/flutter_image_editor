@@ -7,7 +7,7 @@ class Sliders extends StatefulWidget {
   final int index;
   final Map mapValue;
 
-  const Sliders({Key key, this.mapValue, this.index}) : super(key: key);
+  const Sliders({Key? key, required this.mapValue,required this.index}) : super(key: key);
 
   @override
   _SlidersState createState() => _SlidersState();

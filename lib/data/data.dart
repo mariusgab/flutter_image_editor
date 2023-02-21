@@ -1,5 +1,5 @@
 List<String> getSmileys() {
-  List emojis = <String>[];
+  var emojis = <String>[];
   String emoji;
 
   emoji = '😀';

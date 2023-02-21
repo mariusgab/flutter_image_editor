@@ -7,7 +7,7 @@ class BottomBarContainer extends StatelessWidget {
   final IconData icons;
 
   const BottomBarContainer(
-      {Key key, this.ontap, this.title, this.icons, this.colors})
+      {Key? key, required this.ontap, required this.title,required this.icons, required this.colors})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,9 @@ class BottomBarContainer extends StatelessWidget {
           4.0.sizedHeight(),
           title.xText(color: Colors.white)
         ])
-        .xInkWell(onTap: ontap)
+        .xInkWell(onTap: () {
+          ontap();
+        })
         .xMaterial(
           color: colors,
         )
