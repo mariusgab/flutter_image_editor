@@ -5,26 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="60ea1f31-da9d-4cdb-b4dd-df299f338ddb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/example/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/test/widget_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/test/widget_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/example/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/example/windows/flutter/generated_plugins.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/image_editor_pro.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/image_editor_pro.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/all_emojies.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/all_emojies.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/bottombar_container.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/bottombar_container.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/color_piskers_slider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/color_piskers_slider.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/colors_picker.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/colors_picker.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/emoji.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/emoji.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/sliders.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/sliders.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/text.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/text.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/textview.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/textview.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/modules/view_save_image.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/modules/view_save_image.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

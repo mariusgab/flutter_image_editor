@@ -447,95 +447,110 @@ class _ImageEditorProState extends State<ImageEditorPro> {
                 icons: Icons.photo,
                 ontap: () {
                   showModalBottomSheet(
-                      shape:
-                      BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10)).xShapeBorder(),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10))),
                       context: context,
                       builder: (context) {
                         return StatefulBuilder(
                           builder: (context, setS) {
-                            return xColumnCC.list([
-                              5.0.sizedHeight(),
-                              'Slider Hue'.xTextColorWhite(),
-                              10.0.sizedHeight(),
-                              xRow.list([
-                                Slider(
-                                    activeColor: Colors.white,
-                                    inactiveColor: Colors.grey,
-                                    value: hueValue,
-                                    min: -10.0,
-                                    max: 10.0,
-                                    onChanged: (v) {
-                                      setS(() {
-                                        setState(() {
-                                          hueValue = v;
+                            return Container(
+                                height: 300,
+                                decoration: BoxDecoration(
+                                  color: Colors.black87,
+                                  borderRadius:
+                                  BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10)),
+                                ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SizedBox(height: 5,),
+                                  Text("Slider Hue",style: TextStyle(color: Colors.white),),
+                                  SizedBox(height: 10,),
+                                  Row(
+                                    children: [
+                                      Expanded(child: Slider(
+                                          activeColor: Colors.white,
+                                          inactiveColor: Colors.grey,
+                                          value: hueValue,
+                                          min: -10.0,
+                                          max: 10.0,
+                                          onChanged: (v) {
+                                            setS(() {
+                                              setState(() {
+                                                hueValue = v;
+                                              });
+                                            });
+                                          })),
+                                      TextButton(onPressed: () {
+                                        setS(() {
+                                          setState(() {
+                                            blurValue = 0.0;
+                                          });
                                         });
-                                      });
-                                    }).xExpanded(),
-                                'Reset'.xTextColorWhite().xFlatButton(onPressed: () {
-                                  setS(() {
-                                    setState(() {
-                                      blurValue = 0.0;
-                                    });
-                                  });
-                                })
-                              ]),
-                              5.0.sizedHeight(),
-                              'Slider Saturation'.xTextColorWhite(),
-                              10.0.sizedHeight(),
-                              xRow.list([
-                                Slider(
-                                    activeColor: Colors.white,
-                                    inactiveColor: Colors.grey,
-                                    value: saturationValue,
-                                    min: -10.0,
-                                    max: 10.0,
-                                    onChanged: (v) {
-                                      setS(() {
-                                        setState(() {
-                                          saturationValue = v;
+                                      }, child: Text("Reset",style: TextStyle(color: Colors.white),))
+                                    ],
+                                  ),
+                                  SizedBox(height: 5,),
+                                  Text("Slider Saturation",style: TextStyle(color: Colors.white),),
+                                  SizedBox(height: 10,),
+                                  Row(
+                                    children: [
+                                      Expanded(child: Slider(
+                                          activeColor: Colors.white,
+                                          inactiveColor: Colors.grey,
+                                          value: saturationValue,
+                                          min: -10.0,
+                                          max: 10.0,
+                                          onChanged: (v) {
+                                            setS(() {
+                                              setState(() {
+                                                saturationValue = v;
+                                              });
+                                            });
+                                          })),
+                                      TextButton(onPressed: () {
+                                        setS(() {
+                                          setState(() {
+                                            saturationValue = 0.0;
+                                          });
                                         });
-                                      });
-                                    }).xExpanded(),
-                                'Reset'.xTextColorWhite().xFlatButton(onPressed: () {
-                                  setS(() {
-                                    setState(() {
-                                      saturationValue = 0.0;
-                                    });
-                                  });
-                                })
-                              ]),
-                              5.0.sizedHeight(),
-                              'Slider Brightness'.xTextColorWhite(),
-                              10.0.sizedHeight(),
-                              xRow.list([
-                                Slider(
-                                    activeColor: Colors.white,
-                                    inactiveColor: Colors.grey,
-                                    value: brightnessValue,
-                                    min: 0.0,
-                                    max: 1.0,
-                                    onChanged: (v) {
-                                      setS(() {
-                                        setState(() {
-                                          brightnessValue = v;
+                                      }, child: Text("Reset",style: TextStyle(color: Colors.white),))
+
+                                    ],
+                                  ),
+
+                                  SizedBox(height: 5,),
+                                  Text("Slider Brightness",style: TextStyle(color: Colors.white),),
+                                  SizedBox(height: 10,),
+                                  Row(
+                                    children: [
+                                      Expanded(child: Slider(
+                                          activeColor: Colors.white,
+                                          inactiveColor: Colors.grey,
+                                          value: brightnessValue,
+                                          min: 0.0,
+                                          max: 1.0,
+                                          onChanged: (v) {
+                                            setS(() {
+                                              setState(() {
+                                                brightnessValue = v;
+                                              });
+                                            });
+                                          })),
+                                      TextButton(onPressed: () {
+                                        setS(() {
+                                          setState(() {
+                                            brightnessValue = 0.0;
+                                          });
                                         });
-                                      });
-                                    }).xExpanded(),
-                                'Reset'.xTextColorWhite().xFlatButton(onPressed: () {
-                                  setS(() {
-                                    setState(() {
-                                      brightnessValue = 0.0;
-                                    });
-                                  });
-                                })
-                              ])
-                            ]);
+                                      }, child: Text("Reset",style: TextStyle(color: Colors.white),))
+                                    ],
+                                  )
+                                ],
+                              ),
+                            );
                           },
-                        ).xContainer(
-                            color: Colors.black87,
-                            height: 300,
-                            borderRadius:
-                            BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10)));
+                        );
                       });
                 },
                 title: 'Filter',
