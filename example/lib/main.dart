@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_image_editor/flutter_image_editor.dart';
+import 'package:fl_image_editor/flutter_image_editor.dart';
 
 import 'package:image_picker/image_picker.dart';
 

@@ -10,17 +10,14 @@ To start with this, we need to simply add the dependencies in the gradle file of
 
 First, add 
 ```dart
-flutter_image_editor:
-    git:
-      url: https://github.com/mariusgab/flutter_image_editor.git
-      ref: master
+fl_image_editor: any
 ```
 as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
 
 Import
 
 ```dart
-import 'package:flutter_image_editor/flutter_image_editor.dart';
+import 'package:fl_image_editor/flutter_image_editor.dart';
 ```
 
 ### iOS
