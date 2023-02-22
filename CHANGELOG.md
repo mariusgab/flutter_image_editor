@@ -9,3 +9,7 @@
 ## 0.0.3
 
  small fixes
+
+## 0.0.4
+
+ podspec fix
