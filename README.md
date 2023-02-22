@@ -8,7 +8,12 @@ To start with this, we need to simply add the dependencies in the gradle file of
 
 ## Installation
 
-First, add `flutter_image_editor:` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
+First, add 
+`flutter_image_editor:
+    git:
+    url: https://github.com/mariusgab/flutter_image_editor.git
+    ref: master` 
+as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
 
 Import
 
@@ -40,21 +45,12 @@ Or in text format add the key:
 No configuration required - the plugin should work out of the box.
 
 ```dart
- Future<void> getimageditor()  {
-    final geteditimage =   Navigator.push(context, MaterialPageRoute(
-        builder: (context){
-          return ImageEditorPro(
-            appBarColor: Colors.blue,
-            bottomBarColor: Colors.blue,
-          );
-        }
-    )).then((geteditimage){
-      if(geteditimage != null){
-        setState(() {
-          _image =  geteditimage;
-        });
-      }
-    }).catchError((er){print(er);});
-
-  }
+_editImage(String filePath) async {
+  var editedImage = await Navigator.push(context, MaterialPageRoute(builder: (_) => FlutterImageEditor(
+    defaultImage: File(filePath),
+    appBarColor: Colors.blue,
+    bottomBarColor: Colors.blue,
+  )));
+  // do something with the edited image
+}
 ```
