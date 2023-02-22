@@ -13,3 +13,7 @@
 ## 0.0.4
 
  podspec fix
+
+## 0.0.5
+
+ formatting

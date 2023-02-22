@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class BottomBarContainer extends StatelessWidget {
@@ -8,7 +7,11 @@ class BottomBarContainer extends StatelessWidget {
   final IconData icons;
 
   const BottomBarContainer(
-      {Key? key, required this.ontap, required this.title,required this.icons, required this.colors})
+      {Key? key,
+      required this.ontap,
+      required this.title,
+      required this.icons,
+      required this.colors})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -23,11 +26,17 @@ class BottomBarContainer extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(icons,color: Colors.white,),
+              Icon(
+                icons,
+                color: Colors.white,
+              ),
               SizedBox(
                 height: 4,
               ),
-              Text(title,style: TextStyle(color: Colors.white),)
+              Text(
+                title,
+                style: TextStyle(color: Colors.white),
+              )
             ],
           ),
         ),

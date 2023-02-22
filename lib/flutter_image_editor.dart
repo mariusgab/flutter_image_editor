@@ -33,7 +33,8 @@ var howmuchwidgetis = 0;
 //List multiwidget = [];
 Color currentcolors = Colors.white;
 var opicity = 0.0;
-SignatureController _controller = SignatureController(penStrokeWidth: 5, penColor: Colors.green);
+SignatureController _controller =
+    SignatureController(penStrokeWidth: 5, penColor: Colors.green);
 
 class FlutterImageEditor extends StatefulWidget {
   final Color? appBarColor;
@@ -65,7 +66,8 @@ class _FlutterImageEditorState extends State<FlutterImageEditor> {
   void changeColor(Color color) {
     setState(() => pickerColor = color);
     var points = _controller.points;
-    _controller = SignatureController(penStrokeWidth: 5, penColor: color, points: points);
+    _controller =
+        SignatureController(penStrokeWidth: 5, penColor: color, points: points);
   }
 
   List<Offset> offsets = [];
@@ -131,84 +133,105 @@ class _FlutterImageEditorState extends State<FlutterImageEditor> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey.shade400,
-        key: scaf,
-        appBar: AppBar(
-          actions: <Widget>[
-            IconButton(onPressed: () {
-              showCupertinoDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: Text('Select Height Width'),
-                      actions: <Widget>[
-                        TextButton(onPressed: () {
-                          var heightValue = int.tryParse(heightcontroler.text);
-                          var widthValue = int.tryParse(widthcontroler.text);
+      backgroundColor: Colors.grey.shade400,
+      key: scaf,
+      appBar: AppBar(
+        actions: <Widget>[
+          IconButton(
+              onPressed: () {
+                showCupertinoDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text('Select Height Width'),
+                        actions: <Widget>[
+                          TextButton(
+                              onPressed: () {
+                                var heightValue =
+                                    int.tryParse(heightcontroler.text);
+                                var widthValue =
+                                    int.tryParse(widthcontroler.text);
 
-                          if (heightValue != null && widthValue != null) {
-                            setState(() {
-                              height = heightValue;
-                              width = widthValue;
-                            });
-                          }
+                                if (heightValue != null && widthValue != null) {
+                                  setState(() {
+                                    height = heightValue;
+                                    width = widthValue;
+                                  });
+                                }
 
-                          heightcontroler.clear();
-                          widthcontroler.clear();
-                          Navigator.pop(context);
-                        }, child: Text("Done"))
-                      ],
-                      content: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text('Define Height'),
-                            SizedBox(height: 10,),
-                            TextField(
-                                controller: heightcontroler,
-                                keyboardType: TextInputType.numberWithOptions(),
-                                decoration: InputDecoration(
-                                    hintText: 'Height',
-                                    contentPadding: EdgeInsets.only(left: 10),
-                                    border: OutlineInputBorder())),
-                            SizedBox(height: 10,),
-                            Text('Define Width'),
-                            SizedBox(height: 10,),
-                            TextField(
-                                controller: widthcontroler,
-                                keyboardType: TextInputType.numberWithOptions(),
-                                decoration: InputDecoration(
-                                    hintText: 'Width',
-                                    contentPadding: EdgeInsets.only(left: 10),
-                                    border: OutlineInputBorder())),
-                          ],
+                                heightcontroler.clear();
+                                widthcontroler.clear();
+                                Navigator.pop(context);
+                              },
+                              child: Text("Done"))
+                        ],
+                        content: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text('Define Height'),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              TextField(
+                                  controller: heightcontroler,
+                                  keyboardType:
+                                      TextInputType.numberWithOptions(),
+                                  decoration: InputDecoration(
+                                      hintText: 'Height',
+                                      contentPadding: EdgeInsets.only(left: 10),
+                                      border: OutlineInputBorder())),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text('Define Width'),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              TextField(
+                                  controller: widthcontroler,
+                                  keyboardType:
+                                      TextInputType.numberWithOptions(),
+                                  decoration: InputDecoration(
+                                      hintText: 'Width',
+                                      contentPadding: EdgeInsets.only(left: 10),
+                                      border: OutlineInputBorder())),
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  });
-            }, icon: Icon(FontAwesomeIcons.boxesStacked)),
+                      );
+                    });
+              },
+              icon: Icon(FontAwesomeIcons.boxesStacked)),
+          IconButton(
+              onPressed: () {
+                _controller.points.clear();
+                setState(() {});
+              },
+              icon: Icon(Icons.clear)),
+          IconButton(
+              onPressed: () {
+                bottomsheets();
+              },
+              icon: Icon(Icons.camera_alt)),
+          TextButton(
+              onPressed: () {
+                screenshotController
+                    .capture(pixelRatio: widget.pixelRatio ?? 1.5)
+                    .then((binaryIntList) async {
+                  //print("Capture Done");
 
-            IconButton(onPressed: () {
-              _controller.points.clear();
-              setState(() {});
-            }, icon: Icon(Icons.clear)),
+                  final paths =
+                      widget.pathSave ?? await getTemporaryDirectory();
 
-            IconButton(onPressed: () {
-              bottomsheets();
-            }, icon: Icon(Icons.camera_alt)),
-
-            TextButton(onPressed: () {
-              screenshotController.capture(pixelRatio: widget.pixelRatio ?? 1.5).then((binaryIntList) async {
-                //print("Capture Done");
-
-                final paths = widget.pathSave ?? await getTemporaryDirectory();
-
-                final file = await File('${paths.path}/' + DateTime.now().toString() + '.jpg').create();
-                file.writeAsBytesSync(binaryIntList ?? []);
-                Navigator.pop(context, file);
-              }).catchError((onError) {
-                print(onError);
+                  final file = await File(
+                          '${paths.path}/' + DateTime.now().toString() + '.jpg')
+                      .create();
+                  file.writeAsBytesSync(binaryIntList ?? []);
+                  Navigator.pop(context, file);
+                }).catchError((onError) {
+                  print(onError);
                 });
               },
               child: Text("Save"),
@@ -216,413 +239,491 @@ class _FlutterImageEditorState extends State<FlutterImageEditor> {
                 foregroundColor: Colors.white,
               ))
         ],
-          systemOverlayStyle: SystemUiOverlayStyle.dark,
-          // backgroundColor: Colors.red,
-          backgroundColor: widget.appBarColor ?? Colors.black87,
-        ),
-        bottomNavigationBar: openbottomsheet
-            ? Container()
-            : Container(
-          padding: EdgeInsets.all(0.0),
-          decoration: BoxDecoration(
-            color: widget.bottomBarColor ?? Colors.black,
-            boxShadow: [
-              BoxShadow(
-                blurRadius: 10.9,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        // backgroundColor: Colors.red,
+        backgroundColor: widget.appBarColor ?? Colors.black87,
+      ),
+      bottomNavigationBar: openbottomsheet
+          ? Container()
+          : Container(
+              padding: EdgeInsets.all(0.0),
+              decoration: BoxDecoration(
                 color: widget.bottomBarColor ?? Colors.black,
-              )
-            ],
-          ),
-          height: 100,
+                boxShadow: [
+                  BoxShadow(
+                    blurRadius: 10.9,
+                    color: widget.bottomBarColor ?? Colors.black,
+                  )
+                ],
+              ),
+              height: 100,
               child: ListView(
-          scrollDirection: Axis.horizontal,
-          children: [
-              BottomBarContainer(
-                colors: widget.bottomBarColor ?? Colors.blue,
-                icons: FontAwesomeIcons.brush,
-                ontap: () {
-                  // raise the [showDialog] widget
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: Text('Pick a color!'),
-                        content: SingleChildScrollView(
-                          child: ColorPicker(
-                              pickerColor: pickerColor,
-                              onColorChanged: changeColor,
-                              // showLabel: true,
-                              pickerAreaHeightPercent: 0.8,
+                scrollDirection: Axis.horizontal,
+                children: [
+                  BottomBarContainer(
+                    colors: widget.bottomBarColor ?? Colors.blue,
+                    icons: FontAwesomeIcons.brush,
+                    ontap: () {
+                      // raise the [showDialog] widget
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text('Pick a color!'),
+                            content: SingleChildScrollView(
+                              child: ColorPicker(
+                                pickerColor: pickerColor,
+                                onColorChanged: changeColor,
+                                // showLabel: true,
+                                pickerAreaHeightPercent: 0.8,
+                              ),
                             ),
-                        ),
-                        actions: <Widget>[
-                          TextButton(onPressed: () {
-                            setState(() => currentColor = pickerColor);
-                            Navigator.pop(context);
-                          }, child: Text("Done"))
-                        ],
-                      );
-                    },
-                  );
-                },
-                title: 'Brush',
-              ),
-              BottomBarContainer(
-                colors: widget.bottomBarColor ?? Colors.blue,
-                icons: Icons.text_fields,
-                ontap: () async {
-                  var value = await Navigator.push(context, MaterialPageRoute(builder: (context) => TextEditorImage()));
-                  if (value == null) {
-                    return;
-                  }
-
-                  if (value['name'] != null) {
-                    type.add(2);
-                    widgetJson.add(value);
-                    // fontsize.add(20);
-                    offsets.add(Offset.zero);
-                    //  colorList.add(value['color']);
-                    //    multiwidget.add(value['name']);
-                    howmuchwidgetis++;
-                  }
-                },
-                title: 'Text',
-              ),
-              BottomBarContainer(
-                colors: widget.bottomBarColor ?? Colors.blue,
-                icons: Icons.flip,
-                ontap: () {
-                  setState(() {
-                    flipValue = flipValue == 0 ? math.pi : 0;
-                  });
-                },
-                title: 'Flip',
-              ),
-              BottomBarContainer(
-                colors: widget.bottomBarColor ?? Colors.blue,
-                icons: Icons.rotate_left,
-                ontap: () {
-                  setState(() {
-                    rotateValue--;
-                  });
-                },
-                title: 'Rotate left',
-              ),
-              BottomBarContainer(
-                colors: widget.bottomBarColor ?? Colors.blue,
-                icons: Icons.rotate_right,
-                ontap: () {
-                  setState(() {
-                    rotateValue++;
-                  });
-                },
-                title: 'Rotate right',
-              ),
-              BottomBarContainer(
-                colors: widget.bottomBarColor ?? Colors.blue,
-                icons: Icons.blur_on,
-                ontap: () {
-                  showModalBottomSheet(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10))),
-                    context: context,
-                    builder: (context) {
-                      return StatefulBuilder(
-                        builder: (context, setS) {
-                          return Container(
-                            decoration: BoxDecoration(
-                              color: Colors.black87,
-                              borderRadius: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10)),
-                            ),
-                            padding: EdgeInsets.all(20),
-                            height: 300,
-                            child: Column(
-                              children: [
-                                Center(
-                                  child: Text('Slider Filter Color'.toUpperCase(),style: TextStyle(color: Colors.white),),
-                                ),
-                                Divider(),
-                                Text('Slider Color'.toUpperCase(),style: TextStyle(color: Colors.white),),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Expanded(child: BarColorPicker(
-                                        width: 300,
-                                        thumbColor: Colors.white,
-                                        cornerRadius: 10,
-                                        pickMode: PickMode.Color,
-                                        colorListener: (int value) {
-                                          setS(() {
-                                            setState(() {
-                                              colorValue = Color(value);
-                                            });
-                                          });
-                                        })),
-                                    TextButton(onPressed: (){
-                                      setState(() {
-                                        setS(() {
-                                          colorValue = Colors.transparent;
-                                        });
-                                      });
-                                    }, child: Text("Reset",style: TextStyle(color: Colors.white),))
-                                  ],
-                                ),
-                                Text("Slider Blur",style: TextStyle(color: Colors.white),),
-                                Row(
-                                  children: [
-                                    Expanded(child: Slider(
-                                        activeColor: Colors.white,
-                                        inactiveColor: Colors.grey,
-                                        value: blurValue,
-                                        min: 0.0,
-                                        max: 10.0,
-                                        onChanged: (v) {
-                                          setS(() {
-                                            setState(() {
-                                              blurValue = v;
-                                            });
-                                          });
-
-                                        })),
-
-                                    TextButton(onPressed: () {
-                                      setState(() {
-                                        blurValue = 0.0;
-                                      });
-                                    }, child: Text("Reset",style: TextStyle(color: Colors.white),))
-                                  ],
-                                ),
-                                Text("Slider Opacity",style: TextStyle(color: Colors.white),),
-                                Row(
-                                  children: [
-                                    Expanded(child: Slider(
-                                        activeColor: Colors.white,
-                                        inactiveColor: Colors.grey,
-                                        value: opacityValue,
-                                        min: 0.00,
-                                        max: 1.0,
-                                        onChanged: (v) {
-                                          setS(() {
-                                            setState(() {
-                                              opacityValue = v;
-                                            });
-                                          });
-                                        })),
-                                    TextButton(onPressed: () {
-                                      setS(() {
-                                        setState(() {
-                                          opacityValue = 0.0;
-                                        });
-                                      });
-
-                                    }, child: Text("Reset",style: TextStyle(color: Colors.white),))
-                                  ],
-                                )
-                              ],
-                            ),
+                            actions: <Widget>[
+                              TextButton(
+                                  onPressed: () {
+                                    setState(() => currentColor = pickerColor);
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("Done"))
+                            ],
                           );
                         },
                       );
                     },
-                  );
-                },
-                title: 'Blur',
-              ),
-              BottomBarContainer(
-                colors: widget.bottomBarColor ?? Colors.blue,
-                icons: FontAwesomeIcons.eraser,
-                ontap: () {
-                  _controller.clear();
-                  //  type.clear();
-                  // // fontsize.clear();
-                  //  offsets.clear();
-                  // // multiwidget.clear();
-                  howmuchwidgetis = 0;
-                },
-                title: 'Eraser',
-              ),
-              BottomBarContainer(
-                colors: widget.bottomBarColor ?? Colors.blue,
-                icons: Icons.photo,
-                ontap: () {
-                  showModalBottomSheet(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10))),
-                      context: context,
-                      builder: (context) {
-                        return StatefulBuilder(
-                          builder: (context, setS) {
-                            return Container(
-                                height: 280,
+                    title: 'Brush',
+                  ),
+                  BottomBarContainer(
+                    colors: widget.bottomBarColor ?? Colors.blue,
+                    icons: Icons.text_fields,
+                    ontap: () async {
+                      var value = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TextEditorImage()));
+                      if (value == null) {
+                        return;
+                      }
+
+                      if (value['name'] != null) {
+                        type.add(2);
+                        widgetJson.add(value);
+                        // fontsize.add(20);
+                        offsets.add(Offset.zero);
+                        //  colorList.add(value['color']);
+                        //    multiwidget.add(value['name']);
+                        howmuchwidgetis++;
+                      }
+                    },
+                    title: 'Text',
+                  ),
+                  BottomBarContainer(
+                    colors: widget.bottomBarColor ?? Colors.blue,
+                    icons: Icons.flip,
+                    ontap: () {
+                      setState(() {
+                        flipValue = flipValue == 0 ? math.pi : 0;
+                      });
+                    },
+                    title: 'Flip',
+                  ),
+                  BottomBarContainer(
+                    colors: widget.bottomBarColor ?? Colors.blue,
+                    icons: Icons.rotate_left,
+                    ontap: () {
+                      setState(() {
+                        rotateValue--;
+                      });
+                    },
+                    title: 'Rotate left',
+                  ),
+                  BottomBarContainer(
+                    colors: widget.bottomBarColor ?? Colors.blue,
+                    icons: Icons.rotate_right,
+                    ontap: () {
+                      setState(() {
+                        rotateValue++;
+                      });
+                    },
+                    title: 'Rotate right',
+                  ),
+                  BottomBarContainer(
+                    colors: widget.bottomBarColor ?? Colors.blue,
+                    icons: Icons.blur_on,
+                    ontap: () {
+                      showModalBottomSheet(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(10),
+                                topLeft: Radius.circular(10))),
+                        context: context,
+                        builder: (context) {
+                          return StatefulBuilder(
+                            builder: (context, setS) {
+                              return Container(
                                 decoration: BoxDecoration(
                                   color: Colors.black87,
-                                  borderRadius:
-                                  BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10)),
+                                  borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(10),
+                                      topLeft: Radius.circular(10)),
                                 ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text("Slider Hue",style: TextStyle(color: Colors.white),),
-                                  Row(
-                                    children: [
-                                      Expanded(child: Slider(
-                                          activeColor: Colors.white,
-                                          inactiveColor: Colors.grey,
-                                          value: hueValue,
-                                          min: -10.0,
-                                          max: 10.0,
-                                          onChanged: (v) {
-                                            setS(() {
+                                padding: EdgeInsets.all(20),
+                                height: 300,
+                                child: Column(
+                                  children: [
+                                    Center(
+                                      child: Text(
+                                        'Slider Filter Color'.toUpperCase(),
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                    Divider(),
+                                    Text(
+                                      'Slider Color'.toUpperCase(),
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Expanded(
+                                            child: BarColorPicker(
+                                                width: 300,
+                                                thumbColor: Colors.white,
+                                                cornerRadius: 10,
+                                                pickMode: PickMode.Color,
+                                                colorListener: (int value) {
+                                                  setS(() {
+                                                    setState(() {
+                                                      colorValue = Color(value);
+                                                    });
+                                                  });
+                                                })),
+                                        TextButton(
+                                            onPressed: () {
                                               setState(() {
-                                                hueValue = v;
+                                                setS(() {
+                                                  colorValue =
+                                                      Colors.transparent;
+                                                });
                                               });
-                                            });
-                                          })),
-                                      TextButton(onPressed: () {
-                                        setS(() {
-                                          setState(() {
-                                            blurValue = 0.0;
-                                          });
-                                        });
-                                      }, child: Text("Reset",style: TextStyle(color: Colors.white),))
+                                            },
+                                            child: Text(
+                                              "Reset",
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ))
+                                      ],
+                                    ),
+                                    Text(
+                                      "Slider Blur",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                            child: Slider(
+                                                activeColor: Colors.white,
+                                                inactiveColor: Colors.grey,
+                                                value: blurValue,
+                                                min: 0.0,
+                                                max: 10.0,
+                                                onChanged: (v) {
+                                                  setS(() {
+                                                    setState(() {
+                                                      blurValue = v;
+                                                    });
+                                                  });
+                                                })),
+                                        TextButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                blurValue = 0.0;
+                                              });
+                                            },
+                                            child: Text(
+                                              "Reset",
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ))
+                                      ],
+                                    ),
+                                    Text(
+                                      "Slider Opacity",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                            child: Slider(
+                                                activeColor: Colors.white,
+                                                inactiveColor: Colors.grey,
+                                                value: opacityValue,
+                                                min: 0.00,
+                                                max: 1.0,
+                                                onChanged: (v) {
+                                                  setS(() {
+                                                    setState(() {
+                                                      opacityValue = v;
+                                                    });
+                                                  });
+                                                })),
+                                        TextButton(
+                                            onPressed: () {
+                                              setS(() {
+                                                setState(() {
+                                                  opacityValue = 0.0;
+                                                });
+                                              });
+                                            },
+                                            child: Text(
+                                              "Reset",
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ))
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      );
+                    },
+                    title: 'Blur',
+                  ),
+                  BottomBarContainer(
+                    colors: widget.bottomBarColor ?? Colors.blue,
+                    icons: FontAwesomeIcons.eraser,
+                    ontap: () {
+                      _controller.clear();
+                      //  type.clear();
+                      // // fontsize.clear();
+                      //  offsets.clear();
+                      // // multiwidget.clear();
+                      howmuchwidgetis = 0;
+                    },
+                    title: 'Eraser',
+                  ),
+                  BottomBarContainer(
+                    colors: widget.bottomBarColor ?? Colors.blue,
+                    icons: Icons.photo,
+                    ontap: () {
+                      showModalBottomSheet(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(10),
+                                  topLeft: Radius.circular(10))),
+                          context: context,
+                          builder: (context) {
+                            return StatefulBuilder(
+                              builder: (context, setS) {
+                                return Container(
+                                  height: 280,
+                                  decoration: BoxDecoration(
+                                    color: Colors.black87,
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(10),
+                                        topLeft: Radius.circular(10)),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "Slider Hue",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                              child: Slider(
+                                                  activeColor: Colors.white,
+                                                  inactiveColor: Colors.grey,
+                                                  value: hueValue,
+                                                  min: -10.0,
+                                                  max: 10.0,
+                                                  onChanged: (v) {
+                                                    setS(() {
+                                                      setState(() {
+                                                        hueValue = v;
+                                                      });
+                                                    });
+                                                  })),
+                                          TextButton(
+                                              onPressed: () {
+                                                setS(() {
+                                                  setState(() {
+                                                    blurValue = 0.0;
+                                                  });
+                                                });
+                                              },
+                                              child: Text(
+                                                "Reset",
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              ))
+                                        ],
+                                      ),
+                                      Text(
+                                        "Slider Saturation",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                              child: Slider(
+                                                  activeColor: Colors.white,
+                                                  inactiveColor: Colors.grey,
+                                                  value: saturationValue,
+                                                  min: -10.0,
+                                                  max: 10.0,
+                                                  onChanged: (v) {
+                                                    setS(() {
+                                                      setState(() {
+                                                        saturationValue = v;
+                                                      });
+                                                    });
+                                                  })),
+                                          TextButton(
+                                              onPressed: () {
+                                                setS(() {
+                                                  setState(() {
+                                                    saturationValue = 0.0;
+                                                  });
+                                                });
+                                              },
+                                              child: Text(
+                                                "Reset",
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              ))
+                                        ],
+                                      ),
+                                      Text(
+                                        "Slider Brightness",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                              child: Slider(
+                                                  activeColor: Colors.white,
+                                                  inactiveColor: Colors.grey,
+                                                  value: brightnessValue,
+                                                  min: 0.0,
+                                                  max: 1.0,
+                                                  onChanged: (v) {
+                                                    setS(() {
+                                                      setState(() {
+                                                        brightnessValue = v;
+                                                      });
+                                                    });
+                                                  })),
+                                          TextButton(
+                                              onPressed: () {
+                                                setS(() {
+                                                  setState(() {
+                                                    brightnessValue = 0.0;
+                                                  });
+                                                });
+                                              },
+                                              child: Text(
+                                                "Reset",
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              ))
+                                        ],
+                                      )
                                     ],
                                   ),
-                                  Text("Slider Saturation",style: TextStyle(color: Colors.white),),
-                                  Row(
-                                    children: [
-                                      Expanded(child: Slider(
-                                          activeColor: Colors.white,
-                                          inactiveColor: Colors.grey,
-                                          value: saturationValue,
-                                          min: -10.0,
-                                          max: 10.0,
-                                          onChanged: (v) {
-                                            setS(() {
-                                              setState(() {
-                                                saturationValue = v;
-                                              });
-                                            });
-                                          })),
-                                      TextButton(onPressed: () {
-                                        setS(() {
-                                          setState(() {
-                                            saturationValue = 0.0;
-                                          });
-                                        });
-                                      }, child: Text("Reset",style: TextStyle(color: Colors.white),))
-
-                                    ],
-                                  ),
-
-                                  Text("Slider Brightness",style: TextStyle(color: Colors.white),),
-                                  Row(
-                                    children: [
-                                      Expanded(child: Slider(
-                                          activeColor: Colors.white,
-                                          inactiveColor: Colors.grey,
-                                          value: brightnessValue,
-                                          min: 0.0,
-                                          max: 1.0,
-                                          onChanged: (v) {
-                                            setS(() {
-                                              setState(() {
-                                                brightnessValue = v;
-                                              });
-                                            });
-                                          })),
-                                      TextButton(onPressed: () {
-                                        setS(() {
-                                          setState(() {
-                                            brightnessValue = 0.0;
-                                          });
-                                        });
-                                      }, child: Text("Reset",style: TextStyle(color: Colors.white),))
-                                    ],
-                                  )
-                                ],
-                              ),
+                                );
+                              },
                             );
-                          },
-                        );
-                      });
-                },
-                title: 'Filter',
-              ),
-              BottomBarContainer(
-                colors: widget.bottomBarColor ?? Colors.blue,
-                icons: FontAwesomeIcons.faceSmile,
-                ontap: () {
-                  var getemojis = showModalBottomSheet(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return Emojies();
-                      });
-                  getemojis.then((value) {
-                    if (value == null) {
-                      return;
-                    }
+                          });
+                    },
+                    title: 'Filter',
+                  ),
+                  BottomBarContainer(
+                    colors: widget.bottomBarColor ?? Colors.blue,
+                    icons: FontAwesomeIcons.faceSmile,
+                    ontap: () {
+                      var getemojis = showModalBottomSheet(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Emojies();
+                          });
+                      getemojis.then((value) {
+                        if (value == null) {
+                          return;
+                        }
 
-                    if (value['name'] != null) {
-                      type.add(1);
-                      widgetJson.add(value);
-                      //    fontsize.add(20);
-                      offsets.add(Offset.zero);
-                      //  multiwidget.add(value);
-                      howmuchwidgetis++;
-                    }
-                  });
-                },
-                title: 'Emoji',
+                        if (value['name'] != null) {
+                          type.add(1);
+                          widgetJson.add(value);
+                          //    fontsize.add(20);
+                          offsets.add(Offset.zero);
+                          //  multiwidget.add(value);
+                          howmuchwidgetis++;
+                        }
+                      });
+                    },
+                    title: 'Emoji',
+                  ),
+                ],
               ),
-          ],
-        ),),
+            ),
       body: Center(
           child: Screenshot(
-            controller: screenshotController,
-            child: RotatedBox(
-              quarterTurns: rotateValue,
-              child: imageFilterLatest(
-                hue: hueValue,
-                brightness: brightnessValue,
-                saturation: saturationValue,
-                child: RepaintBoundary(
-                    key: globalKey,
-                    child: Container(
-                      margin: EdgeInsets.all(20),
-                      color: Colors.white,
-                      width: width.toDouble(),
-                      height: height.toDouble(),
-                      child: Stack(
-                        children: [
-                          _image != null
-                              ? Transform(
-                            alignment: Alignment.center,
-                            transform: Matrix4.rotationY(flipValue),
-                            child: ClipRect(
-                              // <-- clips to the 200x200 [Container] below
+        controller: screenshotController,
+        child: RotatedBox(
+          quarterTurns: rotateValue,
+          child: imageFilterLatest(
+            hue: hueValue,
+            brightness: brightnessValue,
+            saturation: saturationValue,
+            child: RepaintBoundary(
+                key: globalKey,
+                child: Container(
+                  margin: EdgeInsets.all(20),
+                  color: Colors.white,
+                  width: width.toDouble(),
+                  height: height.toDouble(),
+                  child: Stack(
+                    children: [
+                      _image != null
+                          ? Transform(
+                              alignment: Alignment.center,
+                              transform: Matrix4.rotationY(flipValue),
+                              child: ClipRect(
+                                // <-- clips to the 200x200 [Container] below
 
-                              child: Container(
-                                padding: EdgeInsets.zero,
-                                // alignment: Alignment.center,
-                                width: width.toDouble(),
-                                height: height.toDouble(),
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: FileImage(File(_image?.path ?? ""))
+                                child: Container(
+                                  padding: EdgeInsets.zero,
+                                  // alignment: Alignment.center,
+                                  width: width.toDouble(),
+                                  height: height.toDouble(),
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: FileImage(
+                                            File(_image?.path ?? ""))),
                                   ),
-                                ),
-                                child: BackdropFilter(
-                                  filter: ImageFilter.blur(
-                                    sigmaX: blurValue,
-                                    sigmaY: blurValue,
-                                  ),
-                                  child: Container(
-                                    color: colorValue.withOpacity(opacityValue),
+                                  child: BackdropFilter(
+                                    filter: ImageFilter.blur(
+                                      sigmaX: blurValue,
+                                      sigmaY: blurValue,
+                                    ),
+                                    child: Container(
+                                      color:
+                                          colorValue.withOpacity(opacityValue),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          )
+                            )
 
                           //  BackdropFilter(
                           //     filter: ImageFilter.blur(
@@ -634,78 +735,91 @@ class _FlutterImageEditorState extends State<FlutterImageEditor> {
                           //       fit: BoxFit.cover,
                           //     ),
                           //   )
-                              : Container(),
-                          GestureDetector(
-                            onPanUpdate: (DragUpdateDetails details) {
-                              setState(() {
-                                var object = context.findRenderObject() as RenderBox?;
-                                var _localPosition = object?.globalToLocal(details.globalPosition);
-                                _points = List.from(_points)..add(_localPosition);
-                              });
-                            },
-                            onPanEnd: (DragEndDetails details) {
-                              _points.add(null);
-                            },
-                            child: Signat(),
-                          ),
-
-                          Stack(
-                            children: [
-                              ...widgetJson.asMap().entries.map((f) {
-                                return type[f.key] == 1
-                                    ? EmojiView(
-                                  left: offsets[f.key].dx,
-                                  top: offsets[f.key].dy,
-                                  ontap: () {
-                                    scaf.currentState?.showBottomSheet((context) {
-                                      return Sliders(
-                                        index: f.key,
-                                        mapValue: f.value,
-                                      );
-                                    });
-                                  },
-                                  onpanupdate: (details) {
-                                    setState(() {
-                                      offsets[f.key] =
-                                          Offset(offsets[f.key].dx + details.delta.dx, offsets[f.key].dy + details.delta.dy);
-                                    });
-                                  },
-                                  mapJson: f.value,
-                                )
-                                    : type[f.key] == 2
+                          : Container(),
+                      GestureDetector(
+                        onPanUpdate: (DragUpdateDetails details) {
+                          setState(() {
+                            var object =
+                                context.findRenderObject() as RenderBox?;
+                            var _localPosition =
+                                object?.globalToLocal(details.globalPosition);
+                            _points = List.from(_points)..add(_localPosition);
+                          });
+                        },
+                        onPanEnd: (DragEndDetails details) {
+                          _points.add(null);
+                        },
+                        child: Signat(),
+                      ),
+                      Stack(
+                        children: [
+                          ...widgetJson.asMap().entries.map((f) {
+                            return type[f.key] == 1
+                                ? EmojiView(
+                                    left: offsets[f.key].dx,
+                                    top: offsets[f.key].dy,
+                                    ontap: () {
+                                      scaf.currentState
+                                          ?.showBottomSheet((context) {
+                                        return Sliders(
+                                          index: f.key,
+                                          mapValue: f.value,
+                                        );
+                                      });
+                                    },
+                                    onpanupdate: (details) {
+                                      setState(() {
+                                        offsets[f.key] = Offset(
+                                            offsets[f.key].dx +
+                                                details.delta.dx,
+                                            offsets[f.key].dy +
+                                                details.delta.dy);
+                                      });
+                                    },
+                                    mapJson: f.value,
+                                  )
+                                : type[f.key] == 2
                                     ? TextView(
-                                  left: offsets[f.key].dx,
-                                  top: offsets[f.key].dy,
-                                  ontap: () {
-                                    showModalBottomSheet(
-                                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10)),),
-                                        context: context,
-                                        builder: (context) {
-                                          return Sliders(
-                                            index: f.key,
-                                            mapValue: f.value,
-                                          );
-                                        });
-                                  },
-                                  onpanupdate: (details) {
-                                    setState(() {
-                                      offsets[f.key] =
-                                          Offset(offsets[f.key].dx + details.delta.dx, offsets[f.key].dy + details.delta.dy);
-                                    });
-                                  },
-                                  mapJson: f.value,
-                                )
+                                        left: offsets[f.key].dx,
+                                        top: offsets[f.key].dy,
+                                        ontap: () {
+                                          showModalBottomSheet(
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.only(
+                                                    topRight:
+                                                        Radius.circular(10),
+                                                    topLeft:
+                                                        Radius.circular(10)),
+                                              ),
+                                              context: context,
+                                              builder: (context) {
+                                                return Sliders(
+                                                  index: f.key,
+                                                  mapValue: f.value,
+                                                );
+                                              });
+                                        },
+                                        onpanupdate: (details) {
+                                          setState(() {
+                                            offsets[f.key] = Offset(
+                                                offsets[f.key].dx +
+                                                    details.delta.dx,
+                                                offsets[f.key].dy +
+                                                    details.delta.dy);
+                                          });
+                                        },
+                                        mapJson: f.value,
+                                      )
                                     : Container();
-                              }).toList()
-                            ],
-                          ),
+                          }).toList()
                         ],
                       ),
-                    )),
-              ),
-            ),
-          )
-      ),
+                    ],
+                  ),
+                )),
+          ),
+        ),
+      )),
     );
   }
 
@@ -728,7 +842,10 @@ class _FlutterImageEditorState extends State<FlutterImageEditor> {
               Center(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text('Select Image Options',textAlign: TextAlign.center,),
+                  child: Text(
+                    'Select Image Options',
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ),
               Divider(),
@@ -740,7 +857,8 @@ class _FlutterImageEditorState extends State<FlutterImageEditor> {
                   children: [
                     GestureDetector(
                       onTap: () async {
-                        var image = await picker.pickImage(source: ImageSource.gallery);
+                        var image =
+                            await picker.pickImage(source: ImageSource.gallery);
                         await loadImage(File(image?.path ?? ''));
                         Navigator.pop(context);
                       },
@@ -749,24 +867,31 @@ class _FlutterImageEditorState extends State<FlutterImageEditor> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            IconButton(onPressed: () async {
-                              var image = await picker.pickImage(source: ImageSource.gallery);
-                              await loadImage(File(image?.path ?? ''));
-                              Navigator.pop(context);
-                            }, icon: Icon(Icons.photo_library)),
-                            SizedBox(width: 10,),
+                            IconButton(
+                                onPressed: () async {
+                                  var image = await picker.pickImage(
+                                      source: ImageSource.gallery);
+                                  await loadImage(File(image?.path ?? ''));
+                                  Navigator.pop(context);
+                                },
+                                icon: Icon(Icons.photo_library)),
+                            SizedBox(
+                              width: 10,
+                            ),
                             Text('Open Gallery')
                           ],
                         ),
                       ),
                     ),
-
-                    SizedBox(width: 24,),
-
+                    SizedBox(
+                      width: 24,
+                    ),
                     GestureDetector(
                       onTap: () async {
-                        var image = await picker.pickImage(source: ImageSource.camera);
-                        var decodedImage = await decodeImageFromList(File(image?.path ?? "").readAsBytesSync());
+                        var image =
+                            await picker.pickImage(source: ImageSource.camera);
+                        var decodedImage = await decodeImageFromList(
+                            File(image?.path ?? "").readAsBytesSync());
 
                         setState(() {
                           height = decodedImage.height;
@@ -781,8 +906,11 @@ class _FlutterImageEditorState extends State<FlutterImageEditor> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            IconButton(onPressed: () {}, icon: Icon(Icons.camera_alt)),
-                            SizedBox(width: 10,),
+                            IconButton(
+                                onPressed: () {}, icon: Icon(Icons.camera_alt)),
+                            SizedBox(
+                              width: 10,
+                            ),
                             Text('Open Camera')
                           ],
                         ),
@@ -843,15 +971,18 @@ class _SignatState extends State<Signat> {
 
 Widget imageFilterLatest({brightness, saturation, hue, child}) {
   return ColorFiltered(
-      colorFilter: ColorFilter.matrix(ColorFilterGenerator.brightnessAdjustMatrix(
+      colorFilter:
+          ColorFilter.matrix(ColorFilterGenerator.brightnessAdjustMatrix(
         value: brightness,
       )),
       child: ColorFiltered(
-          colorFilter: ColorFilter.matrix(ColorFilterGenerator.saturationAdjustMatrix(
+          colorFilter:
+              ColorFilter.matrix(ColorFilterGenerator.saturationAdjustMatrix(
             value: saturation,
           )),
           child: ColorFiltered(
-            colorFilter: ColorFilter.matrix(ColorFilterGenerator.hueAdjustMatrix(
+            colorFilter:
+                ColorFilter.matrix(ColorFilterGenerator.hueAdjustMatrix(
               value: hue,
             )),
             child: child,

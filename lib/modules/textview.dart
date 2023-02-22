@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 class TextView extends StatefulWidget {
@@ -32,12 +30,11 @@ class _TextViewState extends State<TextView> {
         },
         onPanUpdate: widget.onpanupdate,
         child: Text(widget.mapJson['name'].toString(),
-          textAlign: widget.mapJson['align'],
+            textAlign: widget.mapJson['align'],
             style: TextStyle(
               color: widget.mapJson['color'],
               fontSize: widget.mapJson['size'],
-            )
-        ),
+            )),
       ),
     );
   }

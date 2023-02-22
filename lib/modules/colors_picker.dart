@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-
 enum PickMode {
   Color,
   Grey,
@@ -59,7 +58,7 @@ class BarColorPicker extends StatefulWidget {
     this.initialColor = const Color(0xffff0000),
     this.thumbColor = Colors.black,
     required this.colorListener,
-  })  : super(key: key);
+  }) : super(key: key);
 
   @override
   _BarColorPickerState createState() => _BarColorPickerState();
@@ -114,22 +113,21 @@ class _BarColorPickerState extends State<BarColorPicker> {
     var thumb = Positioned(
       left: thumbLeft,
       top: thumbTop,
-      child:
-        Container(
-          padding: EdgeInsets.zero,
-          width: thumbRadius * 2,
-          height: thumbRadius * 2,
-          decoration: BoxDecoration(
-              color: widget.thumbColor,
-              borderRadius: BorderRadius.circular(thumbRadius),
+      child: Container(
+        padding: EdgeInsets.zero,
+        width: thumbRadius * 2,
+        height: thumbRadius * 2,
+        decoration: BoxDecoration(
+            color: widget.thumbColor,
+            borderRadius: BorderRadius.circular(thumbRadius),
             boxShadow: [
               BoxShadow(
-                  color: _kThumbShadowColor,
-                  blurRadius: 3,
-                  spreadRadius: 2,),
-            ]
-          ),
-        ),
+                color: _kThumbShadowColor,
+                blurRadius: 3,
+                spreadRadius: 2,
+              ),
+            ]),
+      ),
     );
 
     // build frame
@@ -170,17 +168,14 @@ class _BarColorPickerState extends State<BarColorPicker> {
             gradient: gradient,
           ),
           child: Text(''),
-        )
-    );
+        ));
 
     return GestureDetector(
       onPanDown: (details) => handleTouch(details.globalPosition, context),
       onPanStart: (details) => handleTouch(details.globalPosition, context),
       onPanUpdate: (details) => handleTouch(details.globalPosition, context),
       child: Stack(
-        children: [
-          frame, content, thumb
-        ],
+        children: [frame, content, thumb],
       ),
     );
   }
@@ -282,52 +277,46 @@ class _CircleColorPickerState extends State<CircleColorPicker> {
         left: thumbCenterX,
         top: thumbCenterY,
         child: Container(
-      padding: EdgeInsets.zero,
-      width: thumbRadius * 2,
-      height: thumbRadius * 2,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(thumbRadius),
-        color: widget.thumbColor,
-        boxShadow: [
-          BoxShadow(
-            color: _kThumbShadowColor,
-            spreadRadius: 2,
-            blurRadius: 3
-          )
-        ]
-      ),
-    ));
+          padding: EdgeInsets.zero,
+          width: thumbRadius * 2,
+          height: thumbRadius * 2,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(thumbRadius),
+              color: widget.thumbColor,
+              boxShadow: [
+                BoxShadow(
+                    color: _kThumbShadowColor, spreadRadius: 2, blurRadius: 3)
+              ]),
+        ));
 
-        return GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onPanDown: (details) => handleTouch(details.globalPosition, context),
-          onPanStart: (details) => handleTouch(details.globalPosition, context),
-          onPanUpdate: (details) => handleTouch(details.globalPosition, context),
-          child: Stack(
-          children: [
-            SizedBox(
-                width: (radius + thumbRadius) * 2,
-                height: (radius + thumbRadius) * 2),
-
-            Positioned(
-              left: thumbRadius,
-              top: thumbRadius,
-              child: Container(
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onPanDown: (details) => handleTouch(details.globalPosition, context),
+      onPanStart: (details) => handleTouch(details.globalPosition, context),
+      onPanUpdate: (details) => handleTouch(details.globalPosition, context),
+      child: Stack(
+        children: [
+          SizedBox(
+              width: (radius + thumbRadius) * 2,
+              height: (radius + thumbRadius) * 2),
+          Positioned(
+            left: thumbRadius,
+            top: thumbRadius,
+            child: Container(
               child: Text(''),
-                padding: EdgeInsets.zero,
-                width: radius * 2,
-                height: radius * 2,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(radius),
-                  gradient: SweepGradient(colors: colors),
-                ),
+              padding: EdgeInsets.zero,
+              width: radius * 2,
+              height: radius * 2,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(radius),
+                gradient: SweepGradient(colors: colors),
               ),
             ),
-
-            thumb
-          ],
-    ),
-        );
+          ),
+          thumb
+        ],
+      ),
+    );
   }
 
   /// calculate colors picked from palette and update our states.

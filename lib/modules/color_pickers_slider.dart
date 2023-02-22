@@ -1,14 +1,13 @@
-
 import 'package:flutter/material.dart';
 
 import 'colors_picker.dart';
 
-class ColorPiskersSlider extends StatefulWidget {
+class ColorPickersSlider extends StatefulWidget {
   @override
-  _ColorPiskersSliderState createState() => _ColorPiskersSliderState();
+  _ColorPickersSliderState createState() => _ColorPickersSliderState();
 }
 
-class _ColorPiskersSliderState extends State<ColorPiskersSlider> {
+class _ColorPickersSliderState extends State<ColorPickersSlider> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,20 +24,23 @@ class _ColorPiskersSliderState extends State<ColorPiskersSlider> {
             child: Text('Slider Filter Color'.toUpperCase()),
           ),
           Divider(),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           Text('Slider Color'),
           Row(
             children: [
-              Expanded(child: BarColorPicker(
-                  width: 300,
-                  thumbColor: Colors.white,
-                  cornerRadius: 10,
-                  pickMode: PickMode.Color,
-                  colorListener: (int value) {
-                    setState(() {
-                      //  currentColor = Color(value);
-                    });
-                  })),
+              Expanded(
+                  child: BarColorPicker(
+                      width: 300,
+                      thumbColor: Colors.white,
+                      cornerRadius: 10,
+                      pickMode: PickMode.Color,
+                      colorListener: (int value) {
+                        setState(() {
+                          //  currentColor = Color(value);
+                        });
+                      })),
               TextButton(onPressed: () {}, child: Text("Reset"))
             ],
           ),
@@ -51,7 +53,9 @@ class _ColorPiskersSliderState extends State<ColorPiskersSlider> {
           ),
           Row(
             children: [
-              Expanded(child: Slider(value: 0.1, min: 0.0, max: 1.0, onChanged: (v) {})),
+              Expanded(
+                  child: Slider(
+                      value: 0.1, min: 0.0, max: 1.0, onChanged: (v) {})),
               TextButton(onPressed: () {}, child: Text("Reset"))
             ],
           )

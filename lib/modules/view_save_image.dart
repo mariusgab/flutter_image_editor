@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-
-
 class ImageView extends StatefulWidget {
   final File file;
 

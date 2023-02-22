@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 class EmojiView extends StatefulWidget {
@@ -32,7 +30,8 @@ class _EmojiViewState extends State<EmojiView> {
           widget.ontap();
         },
         onPanUpdate: widget.onpanupdate,
-        child: Text(widget.mapJson['name'].toString(),textAlign: widget.mapJson['align'],
+        child: Text(widget.mapJson['name'].toString(),
+            textAlign: widget.mapJson['align'],
             style: TextStyle(
               color: widget.mapJson['color'],
               fontSize: widget.mapJson['size'],
