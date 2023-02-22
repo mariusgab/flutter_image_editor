@@ -12,8 +12,8 @@ First, add
 ```dart
 flutter_image_editor:
     git:
-    url: https://github.com/mariusgab/flutter_image_editor.git
-    ref: master
+      url: https://github.com/mariusgab/flutter_image_editor.git
+      ref: master
 ```
 as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/).
 
