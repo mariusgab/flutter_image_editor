@@ -1,6 +1,6 @@
 name: fl_image_editor
 description: Image Editor Plugin with simple, easy support for image editing using paints,text and emoji like stories.
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/mariusgab/flutter_image_editor
 
 environment:
