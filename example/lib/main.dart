@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
               ),
               SizedBox(height: 16,),
               TextButton(onPressed: () async {
-                final imageGallery = await ImagePicker().getImage(source: ImageSource.gallery);
+                final imageGallery = await ImagePicker().pickImage(source: ImageSource.gallery);
                 if (imageGallery != null) {
                   _defaultImage = File(imageGallery.path);
                   setState(() => controllerDefaultImage.text = _defaultImage.path);

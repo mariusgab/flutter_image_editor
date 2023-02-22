@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_image_editor/modules/sliders.dart';
@@ -186,7 +187,7 @@ class _FlutterImageEditorState extends State<FlutterImageEditor> {
                       ),
                     );
                   });
-            }, icon: Icon(FontAwesomeIcons.boxes)),
+            }, icon: Icon(FontAwesomeIcons.boxesStacked)),
 
             IconButton(onPressed: () {
               _controller.points.clear();
@@ -212,10 +213,10 @@ class _FlutterImageEditorState extends State<FlutterImageEditor> {
               },
               child: Text("Save"),
               style: OutlinedButton.styleFrom(
-                primary: Colors.white,
+                foregroundColor: Colors.white,
               ))
         ],
-        brightness: Brightness.dark,
+          systemOverlayStyle: SystemUiOverlayStyle.dark,
           // backgroundColor: Colors.red,
           backgroundColor: widget.appBarColor ?? Colors.black87,
         ),
@@ -250,7 +251,7 @@ class _FlutterImageEditorState extends State<FlutterImageEditor> {
                           child: ColorPicker(
                               pickerColor: pickerColor,
                               onColorChanged: changeColor,
-                              showLabel: true,
+                              // showLabel: true,
                               pickerAreaHeightPercent: 0.8,
                             ),
                         ),
@@ -549,7 +550,7 @@ class _FlutterImageEditorState extends State<FlutterImageEditor> {
               ),
               BottomBarContainer(
                 colors: widget.bottomBarColor ?? Colors.blue,
-                icons: FontAwesomeIcons.smile,
+                icons: FontAwesomeIcons.faceSmile,
                 ontap: () {
                   var getemojis = showModalBottomSheet(
                       context: context,
@@ -739,7 +740,7 @@ class _FlutterImageEditorState extends State<FlutterImageEditor> {
                   children: [
                     GestureDetector(
                       onTap: () async {
-                        var image = await picker.getImage(source: ImageSource.gallery);
+                        var image = await picker.pickImage(source: ImageSource.gallery);
                         await loadImage(File(image?.path ?? ''));
                         Navigator.pop(context);
                       },
@@ -749,7 +750,7 @@ class _FlutterImageEditorState extends State<FlutterImageEditor> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             IconButton(onPressed: () async {
-                              var image = await picker.getImage(source: ImageSource.gallery);
+                              var image = await picker.pickImage(source: ImageSource.gallery);
                               await loadImage(File(image?.path ?? ''));
                               Navigator.pop(context);
                             }, icon: Icon(Icons.photo_library)),
@@ -764,7 +765,7 @@ class _FlutterImageEditorState extends State<FlutterImageEditor> {
 
                     GestureDetector(
                       onTap: () async {
-                        var image = await picker.getImage(source: ImageSource.camera);
+                        var image = await picker.pickImage(source: ImageSource.camera);
                         var decodedImage = await decodeImageFromList(File(image?.path ?? "").readAsBytesSync());
 
                         setState(() {

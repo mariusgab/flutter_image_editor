@@ -1,7 +1,7 @@
 
 
 import 'package:flutter/material.dart';
-import 'package:screenshot/screenshot.dart';
+
 
 import '../flutter_image_editor.dart';
 import 'colors_picker.dart';

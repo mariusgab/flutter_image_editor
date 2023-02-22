@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_image_editor/data/data.dart';
-import 'package:screenshot/screenshot.dart';
 
 class Emojies extends StatefulWidget {
   @override
