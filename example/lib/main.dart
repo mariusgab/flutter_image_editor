@@ -24,15 +24,15 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final controllerDefaultImage = TextEditingController();
-  File _defaultImage;
-  File _image;
+  File? _defaultImage;
+  File? _image;
 
   Future<void> getimageditor() => Navigator.push(context, MaterialPageRoute(builder: (context) {
         return FlutterImageEditor(
           appBarColor: Colors.black87,
           bottomBarColor: Colors.black87,
           pathSave: null,
-          defaultImage: _defaultImage,
+          defaultImage: _defaultImage ?? File(""),
         );
       })).then((geteditimage) {
         if (geteditimage != null) {
@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                 final imageGallery = await ImagePicker().pickImage(source: ImageSource.gallery);
                 if (imageGallery != null) {
                   _defaultImage = File(imageGallery.path);
-                  setState(() => controllerDefaultImage.text = _defaultImage.path);
+                  setState(() => controllerDefaultImage.text = _defaultImage?.path ?? "");
                 }
               }, child: Text('Set Default Image')),
               TextButton(onPressed: () {
@@ -79,11 +79,11 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-      ),isFalse: _image == null ? Container() : Center(child: Image.file(_image),)),
+      ),isFalse: _image != null ?  Center(child: Image.file(_image!)) : Container(),),
     );
   }
 }
 
-Widget condition({bool condtion, Widget isTrue, Widget isFalse}) {
+Widget condition({required bool condtion, required Widget isTrue, required Widget isFalse}) {
   return condtion ? isTrue : isFalse;
 }
